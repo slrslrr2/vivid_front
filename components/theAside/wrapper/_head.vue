@@ -70,15 +70,16 @@ export default {
   data() {
     return {
       search: "",
+      whatLoc: "first",
     };
   },
   methods: {
     submit() {
       if (this.search != "") {
-        this.$store.dispatch("getCityInfo", {
-          city: this.search,
-          loc: this.whatLoc,
-        });
+        // this.$store.dispatch("getCityInfo", {
+        // city: this.search,
+        // loc: this.whatLoc,
+        // });
       }
     },
     darkModeChange() {
@@ -86,9 +87,6 @@ export default {
     },
   },
   computed: {
-    whatLoc() {
-      return this.$store.getters.whatLoc;
-    },
     color() {
       // change search box color
       let color;

@@ -92,29 +92,17 @@ export default {
           style: "bottom-[125px] right-[77px] rotate-90",
         },
       ],
+      active: {
+        background: "from-[#9CBDFF] to-[#6498FF]",
+        button: "hover:bg-cyan-600",
+        drops: "from-[#70A0FF] via-[#70A0FF] to-[#FFFFFF]",
+      },
+      currentLoc: {},
+      colors: {},
     };
   },
-  computed: {
-    currentLoc() {
-      return this.$store.getters.currentLoc;
-    },
-    active() {
-      return this.$store.getters.activeDay;
-    },
-    colors() {
-      return this.$store.getters.colors(this.currentLoc.locIndex)
-    },
-  },
   methods: {
-    changeLoc() {
-      // when click location btn, change whatLoc state && selected search input and go top in page 
-      this.$store.commit(
-        "changeWhatLoc",
-        this.currentLoc ? this.currentLoc.locIndex : "first"
-      );
-      document.querySelector("#search_input").select();
-      document.documentElement.scrollTop = 0;
-    },
+    changeLoc() {},
   },
 };
 </script>

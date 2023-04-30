@@ -7,7 +7,10 @@
     class="flex justify-center gap-5 flex-wrap lg:justify-between mt-11"
   />
 
-  <div v-else class="flex justify-center gap-5 flex-wrap lg:justify-between mt-11">
+  <div
+    v-else
+    class="flex justify-center gap-5 flex-wrap lg:justify-between mt-11"
+  >
     <div
       v-for="(day, index) in weathers"
       :key="index"
@@ -38,18 +41,131 @@
 
 <script>
 export default {
+  data() {
+    return {
+      weathers: [
+        {
+          date: "2023-04-30",
+          description: "thunderstorms",
+          humidity: 15,
+          icon: "d240",
+          sunrise: "05:15:28",
+          sunset: "18:51:34",
+          temp: 27,
+          wind: 16,
+        },
+        {
+          date: "2023-05-01",
+          description: "thunderstorms",
+          humidity: 14,
+          icon: "d240",
+          sunrise: "05:14:22",
+          sunset: "18:52:25",
+          temp: 28,
+          wind: 19,
+        },
+        {
+          date: "2023-05-02",
+          description: "clear",
+          humidity: 13,
+          icon: "d000",
+          sunrise: "05:13:17",
+          sunset: "18:53:15",
+          temp: 22,
+          wind: 16,
+        },
+        {
+          date: "2023-05-03",
+          description: "clear",
+          humidity: 10,
+          icon: "d000",
+          sunrise: "05:12:13",
+          sunset: "18:54:06",
+          temp: 24,
+          wind: 15,
+        },
+        {
+          date: "2023-04-30",
+          description: "thunderstorms",
+          humidity: 15,
+          icon: "d240",
+          sunrise: "05:15:28",
+          sunset: "18:51:34",
+          temp: 27,
+          wind: 16,
+        },
+        {
+          date: "2023-05-01",
+          description: "thunderstorms",
+          humidity: 14,
+          icon: "d240",
+          sunrise: "05:14:22",
+          sunset: "18:52:25",
+          temp: 28,
+          wind: 19,
+        },
+        {
+          date: "2023-05-02",
+          description: "clear",
+          humidity: 13,
+          icon: "d000",
+          sunrise: "05:13:17",
+          sunset: "18:53:15",
+          temp: 22,
+          wind: 16,
+        },
+        {
+          date: "2023-04-30",
+          description: "thunderstorms",
+          humidity: 15,
+          icon: "d240",
+          sunrise: "05:15:28",
+          sunset: "18:51:34",
+          temp: 27,
+          wind: 16,
+        },
+        {
+          date: "2023-05-01",
+          description: "thunderstorms",
+          humidity: 14,
+          icon: "d240",
+          sunrise: "05:14:22",
+          sunset: "18:52:25",
+          temp: 28,
+          wind: 19,
+        },
+        {
+          date: "2023-05-02",
+          description: "clear",
+          humidity: 13,
+          icon: "d000",
+          sunrise: "05:13:17",
+          sunset: "18:53:15",
+          temp: 22,
+          wind: 16,
+        },
+      ],
+      active: {
+        date: "2023-04-30",
+        description: "partly cloudy",
+        humidity: 10,
+        icon: "d200",
+        id: 0,
+        sunrise: "05:15:28",
+        sunset: "18:51:34",
+        temp: 27,
+        wind: 16,
+        background: "from-[#9CBDFF] to-[#6498FF]",
+      },
+      locIndex: "first",
+    };
+  },
   computed: {
-    weathers() {
-      return this.$store.getters.currentLoc.weathers;
-    },
-    active() {
-      return this.$store.getters.activeDay;
-    },
     background() {
       // change background when change location
       let background;
 
-      switch (this.$store.getters.currentLoc.locIndex) {
+      switch (this.locIndex) {
         case "first":
           background = "from-[#9CBDFF] to-[#6498FF]";
           break;
@@ -65,13 +181,7 @@ export default {
     },
   },
   methods: {
-    activeDay(index) {
-      // set active day and show weather
-      this.$store.commit("setActiveDay", {
-        ...this.weathers[index],
-        id: index,
-      });
-    },
+    activeDay(index) {},
   },
 };
 </script>

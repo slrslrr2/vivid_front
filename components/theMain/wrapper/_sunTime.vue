@@ -71,16 +71,89 @@
 
 <script>
 export default {
-  computed: {
-    allLoc() {
-      const all = this.$store.getters.allLoc;
-      const array = [];
-
-      for (const key in all) {
-        if (all[key].id) array.push(all[key]);
-      }
-      return array;
-    },
+  data() {
+    return {
+      allLoc: [
+        {
+          country: "Iran",
+          id: 100128747,
+          locIndex: "first",
+          name: "Karaj",
+          weathers: [
+            {
+              date: "2023-04-30",
+              description: "partly cloudy",
+              humidity: 10,
+              icon: "d200",
+              sunrise: "05:15:28",
+              sunset: "18:51:34",
+              temp: 27,
+              wind: 16,
+            },
+            {
+              date: "2023-05-01",
+              description: "thunderstorms",
+              humidity: 14,
+              icon: "d240",
+              sunrise: "05:14:22",
+              sunset: "18:52:25",
+              temp: 28,
+              wind: 19,
+            },
+            {
+              date: "2023-05-02",
+              description: "clear",
+              humidity: 9,
+              icon: "d000",
+              sunrise: "05:13:17",
+              sunset: "18:53:15",
+              temp: 22,
+              wind: 16,
+            },
+            {
+              date: "2023-05-03",
+              description: "clear",
+              humidity: 11,
+              icon: "d000",
+              sunrise: "05:12:13",
+              sunset: "18:54:06",
+              temp: 24,
+              wind: 15,
+            },
+            {
+              date: "2023-05-04",
+              description: "clear",
+              humidity: 15,
+              icon: "d000",
+              sunrise: "05:11:10",
+              sunset: "18:54:56",
+              temp: 20,
+              wind: 26,
+            },
+            {
+              date: "2023-05-05",
+              description: "clear",
+              humidity: 7,
+              icon: "d000",
+              sunrise: "05:10:08",
+              sunset: "18:55:46",
+              temp: 25,
+              wind: 9,
+            },
+            {
+              date: "2023-05-06",
+              description: "clear",
+              humidity: 7,
+              icon: "d000",
+              sunrise: "05:09:08",
+              sunset: "18:56:37",
+              temp: 29,
+              wind: 11,
+            },
+          ],
+        },
+      ],
+    };
   },
 };
 </script>
