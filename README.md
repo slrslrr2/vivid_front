@@ -1,26 +1,47 @@
+## Project nginx setup
 
-![Logo](https://cdn.dribbble.com/users/2716253/screenshots/16206037/media/1e774d64f78a5b719b2b3e7b80e61672.png)
+- Local
+ - nginx
+
+```
+http {
+  include       mime.types;
+  default_type  application/octet-stream;
+
+  sendfile        on;
+  keepalive_timeout  65;
+
+	upstream vivid-backend  {
+		server localhost:7776;
+	}
+  
+  server {
+    listen 80;
+    server_name vivid.co;
+
+    location / {
+          proxy_set_header X-Real-IP            $remote_addr;
+          proxy_set_header X-Forwarded-Host     $host;
+          proxy_set_header X-Forwarded-Server   $host;
+          proxy_set_header X-Forwarded-For      $proxy_add_x_forwarded_for;
+          proxy_set_header Host                 $http_host;
+          proxy_set_header X-SSL-Server         true;
+          proxy_pass   http://vivid-backend;
+    }
+
+    # location ~* \.(gif|jpg|png|js|css|bmp|swf|xml|ico|html|woff|otf|eot|ttf|svg)$ {
+    #     root /Dev;
+    # }
+  }
+}
+```
+
+  - etc/hosts
+```
+  127.0.0.1 vivid.co
+```
 
 
-# Weather
-
-The Weather project displays information using the API. Among the important points of the seven-day information are three different cities. This project modeled on a shot in dribbble written using NUXT.js. [Preview](https://weather-nuxt-one.vercel.app/)
-
-## Lessons Learned
-
--Redesign of the design in Figma, and design dark mode
-
--using weather Api in project 
-
--Design programming and use different libraries
-
->Vue freamwork: [Nuxt.js](https://nuxtjs.org/)
->
->CSS framework: [tailwindcss](https://tailwindcss.com/)
->
->icons: [remixicons](https://remixicon.com/)
->
->API: [foreca](https://developer.foreca.com/)
 
 ## Project setup
 ```bash
