@@ -1,16 +1,16 @@
-// export const state = () => ({
-//   accessToken:
-//     "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9wZmEuZm9yZWNhLmNvbVwvYXV0aG9yaXplXC90b2tlbiIsImlhdCI6MTY4Mjg1OTI4OSwiZXhwIjo5OTk5OTk5OTk5LCJuYmYiOjE2ODI4NTkyODksImp0aSI6IjA5NThkYzI5YzdmM2ZjNTciLCJzdWIiOiJzbHJzbHJyMSIsImZtdCI6IlhEY09oakM0MCtBTGpsWVR0amJPaUE9PSJ9.4TCvI_Oijop2_wTb4W0dHSf1qCl58VRcz_fU0eZmD70",
-//   currentLoc: {},
-//   allLoc: {
-//     first: {},
-//     second: {},
-//     third: {},
-//   },
-//   filteredLoc: [],
-//   activeDay: {},
-//   whatLoc: "first",
-// });
+export const state = () => ({
+  // accessToken:
+  //   "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9wZmEuZm9yZWNhLmNvbVwvYXV0aG9yaXplXC90b2tlbiIsImlhdCI6MTY4Mjg1OTI4OSwiZXhwIjo5OTk5OTk5OTk5LCJuYmYiOjE2ODI4NTkyODksImp0aSI6IjA5NThkYzI5YzdmM2ZjNTciLCJzdWIiOiJzbHJzbHJyMSIsImZtdCI6IlhEY09oakM0MCtBTGpsWVR0amJPaUE9PSJ9.4TCvI_Oijop2_wTb4W0dHSf1qCl58VRcz_fU0eZmD70",
+  // currentLoc: {},
+  // allLoc: {
+  //   first: {},
+  //   second: {},
+  //   third: {},
+  // },
+  // filteredLoc: [],
+  // activeDay: {},
+  // whatLoc: "first",
+});
 
 // export const getters = {
 //   allLoc(state) {
@@ -90,144 +90,133 @@
 //   },
 // };
 
-// export const actions = {
-//   async nuxtServerInit(vuexContext) {
-//     // first enter in page load karaj weather info ssr
-//     const cityResult = await this.$axios.get(`location/search/karaj`, {
-//       headers: {
-//         Authorization: vuexContext.state.accessToken,
-//       },
-//     });
+export const actions = {
+  async getSearchSongInfo(context, payload) {
+    const result = await this.$axios.get(
+      `/api/search/song/info?keyword=${payload.keyword}`
+    );
+    if (result.status !== 200) return;
 
-//     if (cityResult.status !== 200) return;
+    const data = result.data.locations[0];
+    console.log(data);
+  },
 
-//     const { data: cityData } = cityResult;
-//     const dailyResult = await this.$axios.get(
-//       `forecast/daily/${cityData.locations[0].id}?windunit=KMH&dataset=full&periods=7`,
-//       {
-//         headers: {
-//           Authorization: vuexContext.state.accessToken,
-//         },
-//       }
-//     );
+  // async nuxtServerInit(vuexContext) {
+  //   // first enter in page load karaj weather info ssr
+  //   const cityResult = await this.$axios.get(`location/search/karaj`, {
+  //     headers: {
+  //       Authorization: vuexContext.state.accessToken,
+  //     },
+  //   });
 
-//     if (dailyResult.status !== 200) return;
+  //   if (cityResult.status !== 200) return;
 
-//     const { data: dailyData } = dailyResult;
+  //   const { data: cityData } = cityResult;
+  //   const dailyResult = await this.$axios.get(
+  //     `forecast/daily/${cityData.locations[0].id}?windunit=KMH&dataset=full&periods=7`,
+  //     {
+  //       headers: {
+  //         Authorization: vuexContext.state.accessToken,
+  //       },
+  //     }
+  //   );
 
-//     const weather = [];
+  //   if (dailyResult.status !== 200) return;
 
-//     dailyData.forecast.forEach((item) => {
-//       weather.push({
-//         date: item.date,
-//         temp: item.maxTemp,
-//         wind: item.maxWindSpeed,
-//         humidity: item.minRelHumidity,
-//         sunrise: item.sunrise,
-//         sunset: item.sunset,
-//         icon: item.symbol,
-//         description: item.symbolPhrase,
-//       });
-//     });
+  //   const { data: dailyData } = dailyResult;
 
-//     vuexContext.commit("setLocInfo", {
-//       loc: "first",
-//       data: {
-//         id: cityData.locations[0].id,
-//         name: cityData.locations[0].name,
-//         country: cityData.locations[0].country,
-//         weathers: weather,
-//         locIndex: "first",
-//       },
-//     });
+  //   const weather = [];
 
-//     // set data in active day
-//     vuexContext.commit("setActiveDay", {
-//       ...weather[0],
-//       id: 0,
-//     });
+  //   dailyData.forecast.forEach((item) => {
+  //     weather.push({
+  //       date: item.date,
+  //       temp: item.maxTemp,
+  //       wind: item.maxWindSpeed,
+  //       humidity: item.minRelHumidity,
+  //       sunrise: item.sunrise,
+  //       sunset: item.sunset,
+  //       icon: item.symbol,
+  //       description: item.symbolPhrase,
+  //     });
+  //   });
 
-//     // set data in current location
-//     vuexContext.commit("set_CurrentLoc_and_FilterLocations", {
-//       id: cityData.locations[0].id,
-//       name: cityData.locations[0].name,
-//       country: cityData.locations[0].country,
-//       weathers: weather,
-//       locIndex: "first",
-//     });
-//   },
+  //   vuexContext.commit("setLocInfo", {
+  //     loc: "first",
+  //     data: {
+  //       id: cityData.locations[0].id,
+  //       name: cityData.locations[0].name,
+  //       country: cityData.locations[0].country,
+  //       weathers: weather,
+  //       locIndex: "first",
+  //     },
+  //   });
 
-//   async getCityInfo(context, payload) {
-//     const result = await this.$axios.get(`location/search/${payload.city}`, {
-//       headers: {
-//         Authorization: context.state.accessToken,
-//       },
-//     });
+  //   // set data in active day
+  //   vuexContext.commit("setActiveDay", {
+  //     ...weather[0],
+  //     id: 0,
+  //   });
 
-//     if (result.status !== 200) return;
+  //   // set data in current location
+  //   vuexContext.commit("set_CurrentLoc_and_FilterLocations", {
+  //     id: cityData.locations[0].id,
+  //     name: cityData.locations[0].name,
+  //     country: cityData.locations[0].country,
+  //     weathers: weather,
+  //     locIndex: "first",
+  //   });
+  // },
 
-//     const data = result.data.locations[0];
+  // async getDailyWeather(context, payload) {
+  //   const result = await this.$axios.get(
+  //     `forecast/daily/${payload.data.id}?windunit=KMH&dataset=full&periods=7`,
+  //     {
+  //       headers: {
+  //         Authorization: context.state.accessToken,
+  //       },
+  //     }
+  //   );
 
-//     context.dispatch("getDailyWeather", {
-//       loc: payload.loc,
-//       data: {
-//         id: data.id,
-//         name: data.name,
-//         country: data.country,
-//       },
-//     });
-//   },
+  //   if (result.status !== 200) return;
 
-//   async getDailyWeather(context, payload) {
-//     const result = await this.$axios.get(
-//       `forecast/daily/${payload.data.id}?windunit=KMH&dataset=full&periods=7`,
-//       {
-//         headers: {
-//           Authorization: context.state.accessToken,
-//         },
-//       }
-//     );
+  //   const data = result.data.forecast;
 
-//     if (result.status !== 200) return;
+  //   const weather = [];
 
-//     const data = result.data.forecast;
+  //   data.forEach((item) => {
+  //     weather.push({
+  //       date: item.date,
+  //       temp: item.maxTemp,
+  //       wind: item.maxWindSpeed,
+  //       humidity: item.minRelHumidity,
+  //       sunrise: item.sunrise,
+  //       sunset: item.sunset,
+  //       icon: item.symbol,
+  //       description: item.symbolPhrase,
+  //     });
+  //   });
 
-//     const weather = [];
+  //   // set data in location info
+  //   context.commit("setLocInfo", {
+  //     loc: payload.loc,
+  //     data: {
+  //       ...payload.data,
+  //       weathers: weather,
+  //       locIndex: payload.loc,
+  //     },
+  //   });
 
-//     data.forEach((item) => {
-//       weather.push({
-//         date: item.date,
-//         temp: item.maxTemp,
-//         wind: item.maxWindSpeed,
-//         humidity: item.minRelHumidity,
-//         sunrise: item.sunrise,
-//         sunset: item.sunset,
-//         icon: item.symbol,
-//         description: item.symbolPhrase,
-//       });
-//     });
+  //   // set data in active day
+  //   context.commit("setActiveDay", {
+  //     ...weather[0],
+  //     id: 0,
+  //   });
 
-//     // set data in location info
-//     context.commit("setLocInfo", {
-//       loc: payload.loc,
-//       data: {
-//         ...payload.data,
-//         weathers: weather,
-//         locIndex: payload.loc,
-//       },
-//     });
-
-//     // set data in active day
-//     context.commit("setActiveDay", {
-//       ...weather[0],
-//       id: 0,
-//     });
-
-//     // set data in current location
-//     context.commit("set_CurrentLoc_and_FilterLocations", {
-//       ...payload.data,
-//       weathers: weather,
-//       locIndex: payload.loc,
-//     });
-//   },
-// };
+  //   // set data in current location
+  //   context.commit("set_CurrentLoc_and_FilterLocations", {
+  //     ...payload.data,
+  //     weathers: weather,
+  //     locIndex: payload.loc,
+  //   });
+  // },
+};

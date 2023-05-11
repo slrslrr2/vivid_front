@@ -11,7 +11,7 @@
         :class="color"
         placeholder="Search..."
         id="search_input"
-        v-model="search"
+        v-model="keyword"
         @keypress.13="submit"
       />
       <div
@@ -69,17 +69,16 @@
 export default {
   data() {
     return {
-      search: "",
+      keyword: "",
       whatLoc: "first",
     };
   },
   methods: {
     submit() {
       if (this.search != "") {
-        // this.$store.dispatch("getCityInfo", {
-        // city: this.search,
-        // loc: this.whatLoc,
-        // });
+        this.$store.dispatch("getSearchSongInfo", {
+          keyword: this.keyword,
+        });
       }
     },
     darkModeChange() {
